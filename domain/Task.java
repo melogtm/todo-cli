@@ -67,6 +67,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + id + "]" + " " + text + " - " + status + " - Created at: " + created + " - Updated at: " + updated;
+        return id + " - " + text + " - " + status + " - Created at: " + created + " - Updated at: " + updated;
     }
 }
