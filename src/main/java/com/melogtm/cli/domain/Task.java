@@ -5,7 +5,6 @@ import com.melogtm.cli.enums.TaskStatus;
 import java.time.LocalDateTime;
 
 public class Task {
-    private Integer id;
     private String text;
     private TaskStatus status;
     private LocalDateTime created;
@@ -13,24 +12,18 @@ public class Task {
 
     public Task() {}
 
-    public Task(Integer id, String text, LocalDateTime created, LocalDateTime updated) {
-        this.id = id;
+    public Task(String text, LocalDateTime created, LocalDateTime updated) {
         this.text = text;
         this.status = TaskStatus.TO_DO;
         this.created = created;
         this.updated = updated;
     }
 
-    public Task(Integer id, String text, TaskStatus status, LocalDateTime created, LocalDateTime updated) {
-        this.id = id;
+    public Task(String text, TaskStatus status, LocalDateTime created, LocalDateTime updated) {
         this.text = text;
         this.status = status;
         this.created = created;
         this.updated = updated;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getText() {
@@ -63,10 +56,5 @@ public class Task {
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
-    }
-
-    @Override
-    public String toString() {
-        return id + " - " + text + " - " + status + " - Created at: " + created + " - Updated at: " + updated;
     }
 }

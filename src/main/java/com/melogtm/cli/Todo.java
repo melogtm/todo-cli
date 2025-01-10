@@ -1,5 +1,6 @@
 package com.melogtm.cli;
 
+import com.melogtm.cli.service.TaskService;
 import com.melogtm.cli.template.VisualCLI;
 
 public class Todo {
@@ -12,7 +13,6 @@ public class Todo {
             return;
         }
 
-        System.out.println("oi!");
+        TaskService.addTask("AMO QUEIJO");
     }
-
 }
