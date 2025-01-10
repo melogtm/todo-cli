@@ -1,4 +1,6 @@
-import template.VisualCLI;
+package com.melogtm.cli;
+
+import com.melogtm.cli.template.VisualCLI;
 
 public class Todo {
 

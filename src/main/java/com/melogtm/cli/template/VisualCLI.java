@@ -1,4 +1,4 @@
-package template;
+package com.melogtm.cli.template;
 
 public class VisualCLI {
 

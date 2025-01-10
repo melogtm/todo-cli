@@ -1,6 +1,6 @@
-package domain;
+package com.melogtm.cli.domain;
 
-import enums.TaskStatus;
+import com.melogtm.cli.enums.TaskStatus;
 
 import java.time.LocalDateTime;
 

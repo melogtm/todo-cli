@@ -1,4 +1,4 @@
-package service;
+package com.melogtm.cli.service;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
