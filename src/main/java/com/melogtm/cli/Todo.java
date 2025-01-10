@@ -12,7 +12,5 @@ public class Todo {
             System.out.println(terminal.sendHelpMessage());
             return;
         }
-
-        //TaskService.addTask("Cli Todo");
     }
 }
