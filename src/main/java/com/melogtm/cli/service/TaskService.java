@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.melogtm.cli.config.ObjectMapperFix;
 import com.melogtm.cli.domain.Task;
+import com.melogtm.cli.enums.TaskOperations;
+import com.melogtm.cli.enums.TaskStatus;
+import com.melogtm.cli.template.VisualCLI;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -62,6 +65,8 @@ public class TaskService {
             task_database.set(String.valueOf(++id), objectMapper.readTree(task_json));
             // Prettier json (^v^)
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, task_database);
+
+            System.out.println("Task added successfully. (ID " + id + ")");
         } catch (IOException j) {
             System.out.println("An error occurred while adding a task: " + j.getMessage());
         }
@@ -88,6 +93,27 @@ public class TaskService {
         }
     }
 
+    // new_status can be either in progress or done
+    public static void markIn(String id, TaskStatus new_status) {
+        try {
+            ObjectNode task_database = (ObjectNode) objectMapper.readTree(file);
+
+            JsonNode task = task_database.get(id);
+            if (task == null) {
+                System.out.println("Task with id " + id + " not found.");
+                return;
+            }
+
+            ObjectNode task_node = (ObjectNode) task;
+            task_node.put("status", new_status.toString());
+            task_node.put("updated", LocalDateTime.now().format(df));
+
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, task_database);
+        } catch (Exception e) {
+            System.out.println("An error occurred while updating status of a task: " + e.getMessage());
+        }
+    }
+
     public static void deleteTask(String id) {
         try {
             ObjectNode task_database = (ObjectNode) objectMapper.readTree(file);
@@ -102,6 +128,24 @@ public class TaskService {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, task_database);
         } catch (IOException e) {
             System.out.println("An error occurred while deleting a task: " + e.getMessage());
+        }
+    }
+
+    public static void listTasks(TaskOperations.ListFlags filter) {
+        try {
+            ObjectNode task_database = (ObjectNode) objectMapper.readTree(file);
+
+            for (Iterator<Map.Entry<String, JsonNode>> it = task_database.fields(); it.hasNext(); ) {
+                Map.Entry<String, JsonNode> entry = it.next();
+                ObjectNode task = (ObjectNode) entry.getValue();
+
+                if (filter == null || TaskOperations.ListFlags.valueOf(task.get("status")
+                        .asText()) == filter) {
+                    System.out.println(VisualCLI.formatFriendlyTaskList(task));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while listing tasks: " + e.getMessage());
         }
     }
 
