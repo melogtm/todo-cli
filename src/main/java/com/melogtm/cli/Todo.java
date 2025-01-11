@@ -40,8 +40,8 @@ public class Todo {
 
                     break;
             }
-        } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("It seems that you've missed some arguments...");
             System.out.println("Please check the help message below:");
             System.out.println(VisualCLI.sendHelpMessage());
         }
