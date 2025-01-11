@@ -34,7 +34,8 @@ public class Todo {
                     TaskService.markIn(args[1], TaskStatus.DONE);
                     break;
                 case LIST:
-                    if (args.length > 1) TaskService.listTasks(TaskOperations.ListFlags.valueOf(args[1].toUpperCase()));
+                    if (args.length > 1) TaskService.listTasks(TaskOperations.ListFlags.valueOf(
+                            args[1].toUpperCase()));
                     else TaskService.listTasks(null);
 
                     break;

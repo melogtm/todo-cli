@@ -137,11 +137,12 @@ public class TaskService {
 
             for (Iterator<Map.Entry<String, JsonNode>> it = task_database.fields(); it.hasNext(); ) {
                 Map.Entry<String, JsonNode> entry = it.next();
+                String id = entry.getKey();
                 ObjectNode task = (ObjectNode) entry.getValue();
 
                 if (filter == null || TaskOperations.ListFlags.valueOf(task.get("status")
                         .asText()) == filter) {
-                    System.out.println(VisualCLI.formatFriendlyTaskList(task));
+                    System.out.println(VisualCLI.formatFriendlyTaskList(id, task));
                 }
             }
         } catch (IOException e) {

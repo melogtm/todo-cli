@@ -8,7 +8,7 @@ public class VisualCLI {
 
     public VisualCLI() {}
 
-    public static String formatFriendlyTaskList(ObjectNode task) {
+    public static String formatFriendlyTaskList(String id, ObjectNode task) {
 
         String content = task.get("text").asText();
         String status = task.get("status").asText();
@@ -17,7 +17,7 @@ public class VisualCLI {
         String created = task.get("created").asText();
         String updated = task.get("updated").asText();
 
-        return "[*] Task: " + content + " | Status: " + status + " | Created: " + created +
+        return "[ID: " + id + "] Task: " + content + " | Status: " + status + " | Created: " + created +
                 " | Updated: " + updated;
     }
 
